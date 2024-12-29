@@ -53,20 +53,6 @@ public class PrayerFlickHelperPlugin extends Plugin
 		overlayManager.remove(overlay);
 	}
 
-	/*
-	@Subscribe
-	public void onMenuOptionClicked(MenuOptionClicked event) {
-		Widget quickPrayerWidget = client.getWidget(WidgetInfo.MINIMAP_QUICK_PRAYER_ORB);
-
-		Point mousePos = client.getMouseCanvasPosition();
-		boolean clickedPrayerIcon = quickPrayerWidget.getBounds().contains(mousePos.getX(), mousePos.getY());
-
-		if (clickedPrayerIcon) {
-			prayerClicks.add(0);
-		}
-	}
-	*/
-
 	@Subscribe
 	public void onMenuOptionClicked(MenuOptionClicked event) {
 		String menuOption = event.getMenuOption();
@@ -91,37 +77,14 @@ public class PrayerFlickHelperPlugin extends Plugin
 		return ticksSinceStart;
 	}
 
-	public void updateTickStep(int limit) {
-		List<Integer> newList = new ArrayList<>();
-
-		for (int tick : ticksSinceStart) {
-			int updatedTick = tick + 1;
-			if (updatedTick <= limit) {
-				newList.add(tick + 1);
-			}
-		}
-
-		ticksSinceStart = newList;
-	}
-
 	public List<Integer> getPrayerClicks() {
 		return prayerClicks;
 	}
 
-	public void updatePrayerStep(int limit) {
-		List<Integer> newList = new ArrayList<>();
-
-		for (int tick : prayerClicks) {
-			int updatedTick = tick + 1;
-			if (updatedTick <= limit) {
-				newList.add(tick + 1);
-			}
-		}
-
-		prayerClicks = newList;
-	}
-
 	public void updateStep(List<Integer> list, int limit) {
+		// Updates the step for a given list
+		// This is so the points drawn on the graph are shown as moving
+
 		ListIterator<Integer> listIterator = list.listIterator();
 
 		while (listIterator.hasNext()) {
@@ -130,6 +93,7 @@ public class PrayerFlickHelperPlugin extends Plugin
 			if (updatedTick <= limit) {
 				listIterator.set(updatedTick);
 			} else {
+				// Remove points that have left the graph area
 				listIterator.remove();
 			}
 		}

@@ -36,10 +36,10 @@ public class PrayerFlickOverlay extends Overlay {
         graphics.setColor(config.backgroundColour());
         graphics.fillRect(0, 0, width, height);
 
-        // Draw prayer ticks
+        // Draw game ticks on graph
         graphics.setColor(config.tickColour());
 
-        plugin.updateTickStep(width);
+        plugin.updateStep(plugin.getTicksSinceStart(), width);
 
         for (int tick : ticksSinceStart) {
             int x = width - tick;
@@ -52,7 +52,7 @@ public class PrayerFlickOverlay extends Overlay {
         // Draw prayer clicks as points on the graph
         graphics.setColor(config.clickColour());
 
-        plugin.updatePrayerStep(width);
+        plugin.updateStep(plugin.getPrayerClicks(), width);
 
         for (int tick : prayerClicksSinceStart) {
             int x = width - tick;
