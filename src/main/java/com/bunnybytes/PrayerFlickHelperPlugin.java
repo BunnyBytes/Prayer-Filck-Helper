@@ -24,7 +24,9 @@ import java.util.ListIterator;
 public class PrayerFlickHelperPlugin extends Plugin
 {
 	private List<Integer> ticksSinceStart = new ArrayList<>();
-	private List<Integer> prayerClicks = new ArrayList<>();
+	private List<Integer> activatePrayerClicks = new ArrayList<>();
+	private List<Integer> deActivatePrayerClicks = new ArrayList<>();
+
 
 	@Inject
 	private PrayerFlickOverlay overlay;
@@ -57,8 +59,12 @@ public class PrayerFlickHelperPlugin extends Plugin
 	public void onMenuOptionClicked(MenuOptionClicked event) {
 		String menuOption = event.getMenuOption();
 
-		if (menuOption.equals("Activate") || menuOption.equals("Deactivate")) {
-			prayerClicks.add(0);
+		if (menuOption.equals("Activate")) {
+			activatePrayerClicks.add(0);
+		}
+
+		if (menuOption.equals("Deactivate")) {
+			deActivatePrayerClicks.add(0);
 		}
 	}
 
@@ -77,8 +83,12 @@ public class PrayerFlickHelperPlugin extends Plugin
 		return ticksSinceStart;
 	}
 
-	public List<Integer> getPrayerClicks() {
-		return prayerClicks;
+	public List<Integer> getActivatePrayerClicks() {
+		return activatePrayerClicks;
+	}
+
+	public List<Integer> getDeactivatePrayerClicks() {
+		return deActivatePrayerClicks;
 	}
 
 	public void updateStep(List<Integer> list, int limit) {

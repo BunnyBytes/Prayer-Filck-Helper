@@ -47,14 +47,27 @@ public class PrayerFlickOverlay extends Overlay {
             graphics.fillRect(x, 0, 2, height);
         }
 
-        List<Integer> prayerClicksSinceStart = plugin.getPrayerClicks();
+        List<Integer> deactivatePrayerCLicks = plugin.getActivatePrayerClicks();
 
-        // Draw prayer clicks as points on the graph
+        // Draw activate prayer clicks as points on the graph
         graphics.setColor(config.clickColour());
 
-        plugin.updateStep(plugin.getPrayerClicks(), width);
+        plugin.updateStep(plugin.getActivatePrayerClicks(), width);
 
-        for (int tick : prayerClicksSinceStart) {
+        for (int tick : deactivatePrayerCLicks) {
+            int x = width - tick;
+            int y = height / 2;
+            graphics.fillOval(x, y, 5, 5);
+        }
+
+        List<Integer> deActivatePrayerClicks = plugin.getDeactivatePrayerClicks();
+
+        // Draw activate prayer clicks as points on the graph
+        graphics.setColor(config.deactivateColour());
+
+        plugin.updateStep(plugin.getDeactivatePrayerClicks(), width);
+
+        for (int tick : deActivatePrayerClicks) {
             int x = width - tick;
             int y = height / 2;
             graphics.fillOval(x, y, 5, 5);

@@ -38,4 +38,14 @@ public interface PrayerFlickHelperConfig extends Config
 	{
 		return Color.GREEN;
 	}
+
+	@ConfigItem(
+			keyName = "deactivateColour",
+			name = "Deactivate Colour",
+			description = "The colour that the deactivate prayer clicks show on the graph"
+	)
+	default Color deactivateColour()
+	{
+		return Color.RED;
+	}
 }
